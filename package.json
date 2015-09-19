@@ -1,0 +1,38 @@
+{
+  "name": "jama-todo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Todo app for jama",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/webpack/bin/webpack.js -p",
+    "test": "./node_modules/karma/bin/karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bryzaguy/jama-todo-app.git"
+  },
+  "author": "bryzaguy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bryzaguy/jama-todo-app/issues"
+  },
+  "homepage": "https://github.com/bryzaguy/jama-todo-app",
+  "dependencies": {
+    "todomvc-app-css": "^2.0.0",
+    "todomvc-common": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^1.4.3",
+    "eslint-loader": "^1.0.0",
+    "eslint-plugin-react": "^3.4.1",
+    "jasmine-core": "^2.3.4",
+    "jsx-loader": "^0.13.2",
+    "karma": "^0.13.9",
+    "karma-jasmine": "^0.3.6",
+    "karma-safari-launcher": "^0.1.1",
+    "karma-webpack": "^1.7.0",
+    "react": "^0.13.3",
+    "webpack": "^1.12.1"
+  }
+}
