@@ -2,10 +2,12 @@
 
 var React = require('react/addons'),
   TestUtils = React.addons.TestUtils,
+  findAll = TestUtils.scryRenderedComponentsWithType,
   Todos = require('../src/todos'),
   TodoItem = require('../src/todoItem'),
   TodoList = require('../src/todoList'),
   Footer = require('../src/footer'),
+  Share = require('../src/share'),
   App = require('../src/app'),
   ENTER_KEY = 13;
 
@@ -44,10 +46,7 @@ describe('Component: App', function () {
       });
 
       it('refreshes todo list', function () {
-        var todos = TestUtils
-          .scryRenderedComponentsWithType(this.app, TodoItem);
-
-        expect(todos.length).toBe(1);
+        expect(findAll(this.app, TodoItem).length).toBe(1);
       });
     });
 
@@ -62,10 +61,7 @@ describe('Component: App', function () {
 
   describe('todo list', function () {
     it('does not appear if there are no items', function () {
-      var list = TestUtils
-        .scryRenderedComponentsWithType(this.app, TodoList);
-
-      expect(list.length).toBe(0);
+      expect(findAll(this.app, TodoList).length).toBe(0);
     });
     describe('when todo items exist', function () {
       beforeEach(function () {
@@ -92,20 +88,14 @@ describe('Component: App', function () {
 
   describe('footer', function () {
     it('does not appear if there are no items', function () {
-      var footer = TestUtils
-        .scryRenderedComponentsWithType(this.app, Footer);
-
-      expect(footer.length).toBe(0);
+      expect(findAll(this.app, Footer).length).toBe(0);
     });
 
     it('does appear if there are only removed items', function () {
       var item = this.todos.add('something');
       this.todos.remove(item.id);
 
-      var footer = TestUtils
-        .scryRenderedComponentsWithType(this.app, Footer);
-
-      expect(footer.length).toBe(1);
+      expect(findAll(this.app, Footer).length).toBe(1);
     });
 
     describe('when todo items exist', function () {
@@ -130,6 +120,22 @@ describe('Component: App', function () {
       it('has active count as property', function () {
         expect(this.footer.props.totalActive).toBe(2);
       });
+    });
+  });
+
+  describe('share link', function () {
+    it('does not appear if there are no items', function () {
+      expect(findAll(this.app, Share).length).toBe(0);
+    });
+
+    it('appears', function () {
+      this.todos.add('one');
+      expect(findAll(this.app, Share).length).toBe(1);
+    });
+
+    it('has window as property', function () {
+      this.todos.add('one');
+      expect(findAll(this.app, Share)[0].props.window).toBe(window);
     });
   });
 });

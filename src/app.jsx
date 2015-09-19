@@ -3,6 +3,7 @@
 var React = require('react'),
   TodoList = require('./todoList'),
   Footer = require('./footer'),
+  Share = require('./share'),
   ENTER_KEY = 13;
 
 module.exports = React.createClass({
@@ -19,6 +20,7 @@ module.exports = React.createClass({
   render: function () {
     var list,
       footer,
+      share,
       todos = this.props.todos,
       items = todos.get();
 
@@ -26,6 +28,8 @@ module.exports = React.createClass({
       list = (<TodoList items={items} 
                         remove={todos.remove}
                         update={todos.update} />);
+
+      share = <Share items={items} window={window} />;
     }
 
     if (items.length || todos.totalRemoved) {
@@ -35,17 +39,20 @@ module.exports = React.createClass({
     }
 
     return (
-      <section className="todoapp">
-        <header className="header">
-          <h1>todos</h1>
-          <input className="new-todo" 
-                 placeholder="What needs to be done?" 
-                 onKeyDown={this.onKeyDown}
-                 ref="newTodo"
-                 autofocus />
-        </header>
-        {list}
-        {footer}
-      </section>);
+      <div>
+        <section className="todoapp">
+          <header className="header">
+            <h1>todos</h1>
+            <input className="new-todo"
+                   placeholder="What needs to be done?"
+                   onKeyDown={this.onKeyDown}
+                   ref="newTodo"
+                   autofocus />
+          </header>
+          {list}
+          {footer}
+        </section>
+        {share}
+      </div>);
   }
 });
